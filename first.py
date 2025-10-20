@@ -1,151 +1,198 @@
 # ===============================
-# أمثلة موسعة على حلقات for مع النصوص (Strings)
+# شرح مفصل للقوائم (Lists) والداينمك ميثود في بايثون
 # ===============================
 
-# ========== المثال 1: التكرار عبر أحرف النص ==========
+# ========== الجزء 1: تعريف القوائم والوصول للعناصر ==========
 
-text = "مرحبا بالعالم"                # تعريف متغير نصي
+# تعريف قائمة فارغة
+empty_list = []                       # قائمة بدون أي عناصر
+print(f"قائمة فارغة: {empty_list}")
 
-print("أحرف النص individually:")
-for char in text:                     # لكل حرف في النص (char يأخذ قيمة كل حرف على حدة)
-    print(char)                       # طباعة الحرف الحالي
+# تعريف قائمة بأرقام
+numbers = [1, 2, 3, 4, 5]            # قائمة تحتوي على أرقام
+print(f"قائمة أرقام: {numbers}")
 
-# ========== المثال 2: استخدام enumerate للحصول على الفهرس والقيمة ==========
+# تعريف قائمة بنصوص
+fruits = ["تفاح", "موز", "برتقال"]    # قائمة تحتوي على نصوص
+print(f"قائمة فواكه: {fruits}")
 
-print("أحرف النص مع الفهرس:")
-for index, char in enumerate(text):   # enumerate ترجع الفهرس والحرف
-    print(f"المؤشر {index}: الحرف '{char}'")  # طباعة الفهرس والحرف
+# تعريف قائمة مختلطة
+mixed_list = [1, "تفاح", 3.14, True]  # قائمة يمكن أن تحتوي على أنواع مختلفة
+print(f"قائمة مختلطة: {mixed_list}")
 
-# ========== المثال 3: التكرار مع شرط داخل الحلقة ==========
+# الوصول للعناصر باستخدام الفهرس (Index)
+print(f"العنصر الأول: {fruits[0]}")   # الفهرس 0 يعني أول عنصر
+print(f"العنصر الثاني: {fruits[1]}")  # الفهرس 1 يعني ثاني عنصر
+print(f"العنصر الأخير: {fruits[-1]}") # الفهرس -1 يعني آخر عنصر
 
-print("الأحرف التي ليست مسافة:")
-for char in text:                     # التكرار عبر كل حرف
-    if char != " ":                   # إذا كان الحرف ليس مسافة
-        print(char)                   # طباعة الحرف
+# ========== الجزء 2: ميثود إضافة العناصر ==========
 
-# ========== المثال 4: عد الأحرف المتشابهة ==========
+# append() - إضافة عنصر في نهاية القائمة
+fruits.append("فراولة")               # إضافة "فراولة" لنهاية القائمة
+print(f"بعد append: {fruits}")
 
-word = "برمجة"                        # كلمة للبحث
-search_char = "م"                     # الحرف المطلوب عده
-count = 0                             # عداد لعدد التكرارات
+# insert() - إضافة عنصر في موضع محدد
+fruits.insert(1, "عنب")               # إضافة "عنب" في الموضع رقم 1
+print(f"بعد insert: {fruits}")
 
-for char in word:                     # التكرار عبر أحرف الكلمة
-    if char == search_char:           # إذا كان الحرف يساوي الحرف المطلوب
-        count += 1                    # زيادة العداد بمقدار 1
+# extend() - دمج قائمة بأخرى
+more_fruits = ["مانجو", "أناناس"]     # قائمة جديدة
+fruits.extend(more_fruits)            # دمج القائمتين
+print(f"بعد extend: {fruits}")
 
-print(f"الحرف '{search_char}' ظهر {count} مرة في '{word}'")
+# ========== الجزء 3: ميثود إزالة العناصر ==========
 
-# ========== المثال 5: بناء نص جديد من نص موجود ==========
+# remove() - إزالة أول occurrence لعنصر محدد
+fruits.remove("موز")                  # إزالة أول ظهور لكلمة "موز"
+print(f"بعد remove: {fruits}")
 
-original_text = "Hello World"         # النص الأصلي
-new_text = ""                         # نص جديد فارغ
+# pop() - إزالة عنصر من موضع محدد وإرجاع قيمته
+removed_fruit = fruits.pop(2)         # إزالة العنصر في الفهرس 2
+print(f"العنصر المُزال: {removed_fruit}")
+print(f"بعد pop: {fruits}")
 
-for char in original_text:            # التكرار عبر كل حرف في النص الأصلي
-    if char.isupper():                # إذا كان الحرف كبير (isupper دالة جاهزة)
-        new_text += char.lower()      # إضافة الحرف بحروف صغيرة للنص الجديد
-    else:
-        new_text += char.upper()      # إضافة الحرف بحروف كبيرة للنص الجديد
+# pop() بدون index - يزيل آخر عنصر
+last_fruit = fruits.pop()             # إزالة آخر عنصر
+print(f"آخر عنصر مُزال: {last_fruit}")
+print(f"بعد pop أخير: {fruits}")
 
-print(f"النص الأصلي: {original_text}")
-print(f"النص المحول: {new_text}")
+# clear() - إفراغ القائمة بالكامل
+temp_list = [1, 2, 3]                # قائمة مؤقتة
+temp_list.clear()                     # إفراغ القائمة
+print(f"بعد clear: {temp_list}")
 
-# ========== المثال 6: تقسيم نص إلى كلمات والتكرار عبرهم ==========
+# ========== الجزء 4: ميثود البحث والترتيب ==========
 
-sentence = "بايثون لغة برمجة رائعة"   # جملة نصية
-words = sentence.split()              # split تقسيم الجملة إلى كلمات باستخدام
+# index() - إيجاد index أول ظهور لعنصر
+fruits_index = fruits.index("عنب")    # البحث عن index كلمة "عنب"
+print(f"index العنب: {fruits_index}")
 
-print("كلمات الجملة:")
-for word in words:                    # التكرار عبر كل كلمة في القائمة
-    print(word)                       # طباعة الكلمة الحالية
+# count() - عد عدد مرات ظهور عنصر
+numbers_list = [1, 2, 2, 3, 2, 4]    # قائمة بأرقام متكررة
+twos_count = numbers_list.count(2)    # عدد مرات ظهور الرقم 2
+print(f"عدد مرات ظهور 2: {twos_count}")
 
-# ========== المثال 7: التكرار مع range لمعالجة أحرف النص ==========
+# sort() - ترتيب القائمة تصاعدياً
+numbers_to_sort = [3, 1, 4, 1, 5, 9, 2]
+numbers_to_sort.sort()                # ترتيب القائمة
+print(f"بعد sort تصاعدي: {numbers_to_sort}")
 
-text = "أهلًا وسهلًا"                 # نص للعمل عليه
+# sort() تنازلياً
+numbers_to_sort.sort(reverse=True)    # ترتيب القائمة تنازلياً
+print(f"بعد sort تنازلي: {numbers_to_sort}")
 
-print("أحرف النص باستخدام range:")
-for i in range(len(text)):            # len(text) عدد مرات التكرار = طول النص
-    print(f"الحرف في الموضع {i} هو: '{text[i]}'")  # text[i] الوصول للحرف باستخدام الفهرس
+# reverse() - عكس ترتيب القائمة
+fruits.reverse()                      # عكس ترتيب العناصر
+print(f"بعد reverse: {fruits}")
 
-# ========== المثال 8: عكس النص باستخدام for ==========
+# ========== الجزء 5: ميثود النسخ والإنشاء ==========
 
-original = "بايثون"                   # النص الأصلي
-reversed_text = ""                    # نص فارغ للنص المعكوس
+# copy() - إنشاء نسخة من القائمة
+original = [1, 2, 3]                 # القائمة الأصلية
+copied = original.copy()              # نسخ القائمة
+copied.append(4)                      # إضافة عنصر للنسخة فقط
+print(f"الأصل: {original}")           # الأصل لم يتغير
+print(f"النسخة: {copied}")            # النسخة تحتوي على التغيير
 
-for i in range(len(original)-1, -1, -1):  # range بدءاً من آخر حرف إلى الأول
-    reversed_text += original[i]      # إضافة الأحرف من الأخير إلى الأول
+# ========== الجزء 6: العمليات على القوائم ==========
 
-print(f"النص الأصلي: {original}")
-print(f"النص المعكوس: {reversed_text}")
+# len() - معرفة طول القائمة
+list_length = len(fruits)             # عدد العناصر في القائمة
+print(f"طول القائمة: {list_length}")
 
-# ========== المثال 9: البحث عن كلمة داخل نص ==========
+# in - التحقق من وجود عنصر
+has_apple = "تفاح" in fruits          # التحقق إذا كان "تفاح" موجود في القائمة
+print(f"هل التفاح موجود؟ {has_apple}")
 
-paragraph = "بايثون لغة برمجة قوية وسهلة التعلم. بايثون مناسبة للمبتدئين والمحترفين."
-search_word = "بايثون"                # الكلمة المطلوب البحث عنها
-word_count = 0                        # عداد لتكرارات الكلمة
+# + - دمج قائمتين
+list1 = [1, 2, 3]                     # القائمة الأولى
+list2 = [4, 5, 6]                     # القائمة الثانية
+combined = list1 + list2              # دمج القائمتين
+print(f"بعد الدمج: {combined}")
 
-# split تقسيم الفقرة إلى كلمات باستخدام 
-for word in paragraph.split():        # التكرار عبر كل كلمة
-    if word == search_word:           # إذا كانت الكلمة تساوي كلمة البحث
-        word_count += 1               # زيادة العداد
+# * - تكرار القائمة
+repeated = list1 * 3                  # تكرار القائمة 3 مرات
+print(f"بعد التكرار: {repeated}")
 
-print(f"كلمة '{search_word}' تكررت {word_count} مرة في الفقرة")
+# ========== الجزء 7: التقطيع (Slicing) ==========
 
-# ========== المثال 10: معالجة نص مع استثناءات ==========
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]  # قائمة طويلة
 
-text = "PyThOn PrOgRaMmInG"           # نص مزيج من حروف كبيرة وصغيرة
-vowels = "aeiouAEIOU"                 # أحرف العلة
-result = ""                           # نص للنتيجة
+# [start:end] - من start إلى end-1
+slice1 = numbers[2:6]                 # من الفهرس 2 إلى 5
+print(f"من 2 إلى 5: {slice1}")
 
-for char in text:                     # التكرار عبر كل حرف
-    if char in vowels:                # إذا كان الحرف من أحرف العلة
-        result += "*"                 # استبداله بنجمة
-    else:
-        result += char                # وإلا إضافته كما هو
+# [start:] - من start إلى النهاية
+slice2 = numbers[5:]                  # من الفهرس 5 إلى النهاية
+print(f"من 5 إلى النهاية: {slice2}")
 
-print(f"النص الأصلي: {text}")
-print(f"النص بعد التعديل: {result}")
+# [:end] - من البداية إلى end-1
+slice3 = numbers[:4]                  # من البداية إلى الفهرس 3
+print(f"من البداية إلى 3: {slice3}")
 
-# ========== المثال 11: استخدام break و continue مع النصوص ==========
+# [start:end:step] - مع خطوة
+slice4 = numbers[1:8:2]               # من 1 إلى 7 بخطوة 2
+print(f"من 1 إلى 7 بخطوة 2: {slice4}")
 
-text = "مثال على استخدام break و continue"
-print("الحروف حتى الوصول لمسافة:")
+# [::-1] - عكس القائمة
+reversed_numbers = numbers[::-1]      # عكس القائمة كاملة
+print(f"القائمة المعكوسة: {reversed_numbers}")
 
-for char in text:                     # التكرار عبر كل حرف
-    if char == " ":                   # إذا كان الحرف مسافة
-        break                         # break إيقاف الحلقة باستخدام
-    print(char)                       # طباعة الحرف
+# ========== الجزء 8: List Comprehension ==========
 
-print("\nجميع الحروف ما عدا 'ا':")
-for char in text:                     # التكرار عبر كل حرف
-    if char == "ا":                   # إذا كان الحرف 'ا'
-        continue                      # continue تخطي هذا التكرار باستخدام
-    print(char)                       # طباعة الحرف
+# إنشاء قائمة جديدة من قائمة موجودة
+squares = [x**2 for x in numbers]     # مربع كل عدد في القائمة
+print(f"مربعات الأعداد: {squares}")
 
-# ========== المثال 12: تطبيق عملي - تحليل نص ==========
+# List comprehension مع شرط
+even_squares = [x**2 for x in numbers if x % 2 == 0]  # مربعات الأعداد الزوجية فقط
+print(f"مربعات الأعداد الزوجية: {even_squares}")
 
-def analyze_text(input_text):         # دالة لتحليل النص
-    """تحليل النص وإحصائياته"""       # وثائق الدالة
-    char_count = 0                    # عداد الأحرف
-    space_count = 0                   # عداد المسافات
-    vowel_count = 0                   # عداد أحرف العلة العربية
-    arabic_vowels = "ايو"             # أحرف العلة العربية
+# تحويل قائمة نصية
+upper_fruits = [fruit.upper() for fruit in fruits]  # تحويل كل فاكهة لحروف كبيرة
+print(f"الفواكه بحروف كبيرة: {upper_fruits}")
+
+# ========== الجزء 9: أمثلة عملية شاملة ==========
+
+def list_operations_demo():
+    """عرض شامل لعمليات القوائم"""
     
-    for char in input_text:           # التكرار عبر كل حرف في النص
-        char_count += 1               # زيادة عداد الأحرف
-        if char == " ":               # إذا كان حرف مسافة
-            space_count += 1          # زيادة عداد المسافات
-        if char in arabic_vowels:     # إذا كان حرف علة
-            vowel_count += 1          # زيادة عداد أحرف العلة
+    # إنشاء قائمة طلاب
+    students = ["أحمد", "محمد", "فاطمة", "علي"]
+    print(f"قائمة الطلاب الأصلية: {students}")
     
-    # طباعة النتائج
-    print(f"تحليل النص: '{input_text}'")
-    print(f"عدد الأحرف الكلي: {char_count}")
-    print(f"عدد المسافات: {space_count}")
-    print(f"عدد أحرف العلة: {vowel_count}")
-    print(f"عدد الكلمات: {len(input_text.split())}")
+    # إضافة طلاب جدد
+    students.append("حسن")
+    students.insert(2, "زينب")
+    print(f"بعد الإضافات: {students}")
+    
+    # ترتيب القائمة أبجدياً
+    students.sort()
+    print(f"بعد الترتيب الأبجدي: {students}")
+    
+    # البحث عن طالب
+    if "أحمد" in students:
+        position = students.index("أحمد") + 1
+        print(f"أحمد موجود في المركز {position}")
+    
+    # إنشاء قائمة فرعية
+    first_three = students[:3]
+    print(f"الثلاثة الأوائل: {first_three}")
+    
+    # استخدام list comprehension
+    students_upper = [name.upper() for name in students]
+    print(f"الأسماء بحروف كبيرة: {students_upper}")
+    
+    return students
 
-# اختبار الدالة
-analyze_text("بايثون لغة برمجة ممتازة")
+# تشغيل الدالة
+final_list = list_operations_demo()
 
-print("\n" + "="*40)
-print("انتهت أمثلة حلقات for مع النصوص")
+print("\n" + "="*50)
+print("ملخص ميثود القوائم:")
+print("الإضافة: append(), insert(), extend()")
+print("الإزالة: remove(), pop(), clear()")
+print("البحث: index(), count(), in")
+print("الترتيب: sort(), reverse()")
+print("النسخ: copy()")
+print("المعلومات: len()")
